@@ -232,7 +232,7 @@ footer{background:#0a1d34;color:rgba(255,255,255,.7);padding:4rem 0 1.5rem;font-
 .foot-bottom a:hover{color:var(--green-2)}
 
 /* ---------- WhatsApp float ---------- */
-.wa-float{position:fixed;bottom:26px;right:26px;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 30px -6px rgba(37,211,102,.6);z-index:90;transition:.3s;animation:pulse 2.4s infinite}
+.wa-float{position:fixed;bottom:102px;right:28px;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 30px -6px rgba(37,211,102,.6);z-index:90;transition:.3s;animation:pulse 2.4s infinite}
 .wa-float:hover{transform:scale(1.1)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
 
@@ -266,6 +266,48 @@ footer{background:#0a1d34;color:rgba(255,255,255,.7);padding:4rem 0 1.5rem;font-
 /* ---------- Floating hero card ---------- */
 .hero-card{animation:floaty 5s ease-in-out infinite}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* ---------- Chatbot ---------- */
+.chat-launcher{position:fixed;bottom:26px;right:26px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy-2));display:grid;place-items:center;cursor:pointer;z-index:95;box-shadow:0 14px 34px -10px rgba(15,44,76,.6);transition:.35s;border:none}
+.chat-launcher:hover{transform:translateY(-4px) scale(1.05)}
+.chat-launcher .robot{animation:botBob 3s ease-in-out infinite}
+.chat-launcher::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(76,162,47,.5);animation:botPulse 2.4s infinite}
+.chat-launcher.hide{transform:scale(0);opacity:0;pointer-events:none}
+.chat-badge{position:absolute;top:-3px;right:-3px;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:.7rem;font-weight:700;display:grid;place-items:center;border:2px solid #fff;z-index:2}
+@keyframes botBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes botPulse{0%{box-shadow:0 0 0 0 rgba(76,162,47,.5)}70%{box-shadow:0 0 0 16px rgba(76,162,47,0)}100%{box-shadow:0 0 0 0 rgba(76,162,47,0)}}
+.chat-panel{position:fixed;bottom:26px;right:26px;width:min(380px,92vw);height:min(580px,82vh);background:#fff;border-radius:22px;box-shadow:0 30px 70px -20px rgba(15,44,76,.5);z-index:96;display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(30px) scale(.96);pointer-events:none;transition:.35s cubic-bezier(.2,.7,.3,1);border:1px solid var(--line)}
+.chat-panel.open{opacity:1;transform:none;pointer-events:auto}
+.chat-head{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem}
+.chat-head .av{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;flex:none}
+.chat-head .av .robot{animation:botBob 3s ease-in-out infinite}
+.chat-head b{font-size:1rem;display:block;font-family:'Inter'}
+.chat-head small{font-size:.74rem;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:.35rem}
+.chat-head small::before{content:"";width:7px;height:7px;border-radius:50%;background:#4ce05f;box-shadow:0 0 0 3px rgba(76,224,95,.25)}
+.chat-close{margin-left:auto;background:rgba(255,255,255,.12);border:none;width:32px;height:32px;border-radius:50%;color:#fff;cursor:pointer;font-size:1.1rem;transition:.25s}
+.chat-close:hover{background:rgba(255,255,255,.25);transform:rotate(90deg)}
+.chat-body{flex:1;overflow-y:auto;padding:1.2rem;background:var(--bg-soft);display:flex;flex-direction:column;gap:.7rem}
+.chat-body::-webkit-scrollbar{width:6px}.chat-body::-webkit-scrollbar-thumb{background:#cdd9e3;border-radius:6px}
+.msg{max-width:84%;padding:.7rem .95rem;border-radius:16px;font-size:.89rem;line-height:1.5;animation:msgIn .3s ease}
+.msg.bot{background:#fff;color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start}
+.msg.user{background:linear-gradient(120deg,var(--green),var(--green-2));color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+.msg.bot a{color:var(--green);font-weight:600}
+.msg.user a{color:#fff;text-decoration:underline}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.typing{display:flex;gap:4px;align-self:flex-start;background:#fff;border:1px solid var(--line);padding:.85rem 1rem;border-radius:16px;border-bottom-left-radius:5px}
+.typing span{width:7px;height:7px;border-radius:50%;background:#9fb0bf;animation:typingdot 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes typingdot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
+.quick{display:flex;flex-wrap:wrap;gap:.5rem}
+.quick button{background:#fff;border:1.5px solid var(--green);color:var(--navy);font-size:.81rem;font-weight:600;padding:.5rem .9rem;border-radius:50px;cursor:pointer;transition:.2s;font-family:inherit}
+.quick button:hover{background:var(--green);color:#fff}
+.chat-input{display:flex;gap:.5rem;padding:.7rem;background:#fff;border-top:1px solid var(--line)}
+.chat-input input{flex:1;border:1.5px solid var(--line);border-radius:50px;padding:.7rem 1rem;font-family:inherit;font-size:.88rem;outline:none;transition:.2s}
+.chat-input input:focus{border-color:var(--green)}
+.chat-input button{width:42px;height:42px;border-radius:50%;background:linear-gradient(120deg,var(--green),var(--green-2));border:none;color:#fff;cursor:pointer;display:grid;place-items:center;flex:none;transition:.2s}
+.chat-input button:hover{transform:scale(1.08)}
+.chat-disc{font-size:.66rem;color:var(--muted);text-align:center;padding:.4rem .4rem .6rem;background:#fff}
+@media(max-width:480px){.chat-panel{bottom:0;right:0;width:100vw;height:100dvh;border-radius:0}}
 
 /* ---------- Modal (CGU) ---------- */
 .modal{position:fixed;inset:0;background:rgba(10,29,52,.7);backdrop-filter:blur(4px);z-index:200;display:none;align-items:center;justify-content:center;padding:5%}
@@ -684,6 +726,41 @@ footer{background:#0a1d34;color:rgba(255,255,255,.7);padding:4rem 0 1.5rem;font-
   <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20z"/></svg>
 </a>
 
+<!-- Chatbot Lexi -->
+<button class="chat-launcher" id="chatLauncher" aria-label="Ouvrir l'assistant Lexi">
+  <span class="chat-badge">1</span>
+  <svg class="robot" width="34" height="34" viewBox="0 0 48 48" fill="none">
+    <line x1="24" y1="7" x2="24" y2="13" stroke="#fff" stroke-width="2.4"/><circle cx="24" cy="6" r="2.6" fill="#6cba3a"/>
+    <rect x="10" y="13" width="28" height="22" rx="7" fill="#fff"/>
+    <rect x="5.5" y="21" width="3.4" height="8" rx="1.7" fill="#fff"/><rect x="39.1" y="21" width="3.4" height="8" rx="1.7" fill="#fff"/>
+    <circle cx="19" cy="24" r="3.1" fill="#163a63"/><circle cx="29" cy="24" r="3.1" fill="#163a63"/>
+    <rect x="19.5" y="29.5" width="9" height="2.6" rx="1.3" fill="#6cba3a"/>
+  </svg>
+</button>
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Assistant Lexi">
+  <div class="chat-head">
+    <span class="av">
+      <svg class="robot" width="30" height="30" viewBox="0 0 48 48" fill="none">
+        <line x1="24" y1="7" x2="24" y2="13" stroke="#fff" stroke-width="2.4"/><circle cx="24" cy="6" r="2.6" fill="#6cba3a"/>
+        <rect x="10" y="13" width="28" height="22" rx="7" fill="#fff"/>
+        <rect x="5.5" y="21" width="3.4" height="8" rx="1.7" fill="#fff"/><rect x="39.1" y="21" width="3.4" height="8" rx="1.7" fill="#fff"/>
+        <circle cx="19" cy="24" r="3.1" fill="#163a63"/><circle cx="29" cy="24" r="3.1" fill="#163a63"/>
+        <rect x="19.5" y="29.5" width="9" height="2.6" rx="1.3" fill="#6cba3a"/>
+      </svg>
+    </span>
+    <div><b>Lexi · Assistant</b><small>En ligne</small></div>
+    <button class="chat-close" onclick="closeChat()" aria-label="Fermer">×</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-input">
+    <input id="chatText" type="text" placeholder="Écrivez votre question…" autocomplete="off">
+    <button onclick="sendChat()" aria-label="Envoyer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
+    </button>
+  </div>
+  <div class="chat-disc">Assistant virtuel — informations générales, pas un conseil juridique.</div>
+</div>
+
 <!-- Back to top -->
 <button class="top-btn" id="topBtn" aria-label="Haut de page">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
@@ -754,6 +831,54 @@ document.getElementById('contactForm').addEventListener('submit',function(e){
   const body=`Nom: ${nom}%0D%0AEmail: ${email}%0D%0ATéléphone: ${tel}%0D%0ADomaine: ${sujet}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(msg)}`;
   window.location.href=`mailto:info@lexco.com?subject=${encodeURIComponent('Demande de conseil — '+sujet)}&body=${body}`;
 });
+
+// ---------- Chatbot Lexi (démo scriptée, prête à brancher l'IA) ----------
+const cl=document.getElementById('chatLauncher'),cp=document.getElementById('chatPanel'),cbody=document.getElementById('chatBody'),cinput=document.getElementById('chatText');
+let chatStarted=false;
+const introQuick=[{label:'Créer une société',intent:'societe'},{label:'Droit du travail',intent:'travail'},{label:'Famille / divorce',intent:'famille'},{label:'Certificat environnemental',intent:'enviro'},{label:'Parler à un conseiller',intent:'contact'}];
+const contactQuick=[{label:'Parler à un conseiller',intent:'contact'},{label:'Autre question',intent:'menu'}];
+const intro="Bonjour 👋 Je suis <b>Lexi</b>, l'assistant de LexConformis Firm. Posez votre question : je vous oriente, puis je vous mets en relation avec un conseiller.<br><br><span style='color:#5e6b78;font-size:.8rem'>ℹ️ Je donne des informations générales, pas un conseil juridique personnalisé.</span>";
+const answers={
+ societe:"Pour <b>créer une société en RDC</b>, les démarches passent par le <b>Guichet Unique de Création d'Entreprises (GUCE)</b>, qui centralise tout en un seul endroit : réservation du nom, dépôt des statuts, immatriculation au <b>RCCM</b>, obtention du numéro national d'identification et du numéro impôt — en quelques jours ouvrables.<br><br>👉 Site officiel : <a href='https://economie.gouv.cd/investissements/guce' target='_blank' rel='noopener'>GUCE</a>.<br><br>Chez LexConformis, nous rédigeons vos <b>statuts</b> et vous accompagnons sur tout le processus. Voulez-vous en parler à un conseiller ?",
+ travail:"En <b>droit du travail</b> (Code du travail de la RDC), nous assistons employés et employeurs : relecture et rédaction de contrat, procédures de licenciement, plan social, négociations salariales…<br><br>Souhaitez-vous une analyse de votre situation par un conseiller ?",
+ famille:"En <b>droit de la famille</b>, nous traitons mariage, divorce, succession, filiation et adoption, avec des solutions adaptées à vos droits.<br><br>Voulez-vous exposer votre situation à un conseiller, en toute confidentialité ?",
+ enviro:"Pour un <b>Certificat Environnemental</b>, la loi 11/009 du 9 juillet 2011 impose une <b>Étude d'Impact Environnemental et Social (EIES)</b> avant tout projet, ou un <b>Plan de Mise en Conformité (PMC-ES)</b> pour un projet déjà en activité. Nous gérons tout le processus auprès de l'Agence Congolaise de l'Environnement.<br><br>Voulez-vous demander une étude ?",
+ contact:"Avec plaisir 🙌 Voici comment joindre nos conseillers :<br><br>📧 <a href='mailto:info@lexco.com'>info@lexco.com</a><br>📱 <a href='https://wa.me/27618971391' target='_blank' rel='noopener'>WhatsApp : +27 618 971 391</a><br>📞 <a href='tel:+243812475061'>+243 812 475 061</a><br><br>Ou remplissez le <a href='#contact' onclick='closeChat()'>formulaire de contact</a>. Un conseiller vous répondra rapidement."
+};
+function scrollChat(){cbody.scrollTop=cbody.scrollHeight;}
+function clearQuick(){cbody.querySelectorAll('.quick').forEach(q=>q.remove());}
+function userSay(t){const d=document.createElement('div');d.className='msg user';d.textContent=t;cbody.appendChild(d);scrollChat();}
+function botSay(html,quick){
+ const t=document.createElement('div');t.className='typing';t.innerHTML='<span></span><span></span><span></span>';cbody.appendChild(t);scrollChat();
+ setTimeout(()=>{
+   t.remove();
+   const d=document.createElement('div');d.className='msg bot';d.innerHTML=html;cbody.appendChild(d);
+   if(quick&&quick.length){const q=document.createElement('div');q.className='quick';quick.forEach(qq=>{const b=document.createElement('button');b.textContent=qq.label;b.onclick=()=>{userSay(qq.label);clearQuick();answer(qq.intent);};q.appendChild(b);});cbody.appendChild(q);}
+   scrollChat();
+ },650+Math.random()*450);
+}
+function answer(intent){
+ if(intent==='menu'){botSay("Bien sûr, sur quel sujet ?",introQuick);return;}
+ const a=answers[intent];
+ if(a){botSay(a,intent==='contact'?[{label:'Autre question',intent:'menu'}]:contactQuick);}
+ else{botSay("Je suis encore en apprentissage sur ce point précis 🙂. Le mieux est d'en parler à un conseiller — je vous mets en relation ?",contactQuick);}
+}
+function matchIntent(t){t=t.toLowerCase();
+ if(/soci[eé]t|entrepris|cr[eé]er|rccm|guce|guichet|statut/.test(t))return'societe';
+ if(/travail|licenci|contrat|employ|salari|emploi|patron/.test(t))return'travail';
+ if(/famill|divorce|mariage|succession|enfant|adoption|h[eé]rit/.test(t))return'famille';
+ if(/environ|certificat|eies|impact|pmc|\bace\b/.test(t))return'enviro';
+ if(/contact|conseiller|avocat|rendez|parler|t[eé]l[eé]phone|whatsapp|email|joindre|num[eé]ro/.test(t))return'contact';
+ if(/bonjour|salut|bonsoir|hello|coucou|mbote/.test(t))return'greet';
+ return null;}
+function sendChat(){const v=cinput.value.trim();if(!v)return;userSay(v);cinput.value='';clearQuick();
+ const i=matchIntent(v);
+ if(i==='greet'){botSay("Bonjour 😊 Comment puis-je vous aider aujourd'hui ?",introQuick);}
+ else answer(i);}
+function openChat(){cp.classList.add('open');cl.classList.add('hide');const badge=cl.querySelector('.chat-badge');if(badge)badge.style.display='none';if(!chatStarted){chatStarted=true;setTimeout(()=>botSay(intro,introQuick),450);}setTimeout(()=>cinput.focus(),400);}
+function closeChat(){cp.classList.remove('open');cl.classList.remove('hide');}
+cl.addEventListener('click',openChat);
+cinput.addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
 
 // CGU modal
 function openCGU(e){if(e)e.preventDefault();document.getElementById('cguModal').classList.add('open');document.body.style.overflow='hidden'}
