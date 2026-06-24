@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Droit de la famille — LexConformis Firm</title>
+<meta name="description" content="Mariage, divorce, succession, filiation, adoption : comprendre le droit de la famille en RDC avec LexConformis Firm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0f2c4c;--navy-2:#163a63;--green:#4ca22f;--green-2:#6cba3a;--green-soft:#eaf6e6;--ink:#14202e;--muted:#5e6b78;--bg:#fff;--bg-soft:#f6f9fc;--line:#e6edf3;--shadow:0 18px 50px -18px rgba(15,44,76,.28)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75}
+h1,h2,h3{font-family:'Playfair Display',serif}
+a{text-decoration:none;color:inherit}
+svg{display:block}
+.wrap{width:min(820px,92%);margin-inline:auto}
+.progress-bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--green),var(--green-2));z-index:300;transition:width .12s;box-shadow:0 0 10px rgba(108,186,58,.6)}
+/* header */
+.site-head{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.site-head .wrap{width:min(1120px,92%);display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+.brand{display:flex;align-items:center;gap:.6rem}
+.brand b{font-family:'Playfair Display',serif;font-size:1.15rem}
+.brand b .a{color:var(--navy)}.brand b .g{color:var(--green)}
+.back{display:inline-flex;align-items:center;gap:.45rem;font-size:.9rem;font-weight:600;color:var(--navy);padding:.55rem 1.1rem;border:1.5px solid var(--line);border-radius:50px;transition:.25s}
+.back:hover{background:var(--navy);color:#fff;border-color:transparent}
+/* hero */
+.art-hero{background:radial-gradient(900px 400px at 80% -20%,rgba(108,186,58,.22),transparent 60%),linear-gradient(135deg,#0c2440,#0f2c4c 60%,#15375f);color:#fff;padding:4rem 0 3rem}
+.art-hero .tag{display:inline-block;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--green-2);background:rgba(108,186,58,.14);border:1px solid rgba(108,186,58,.35);padding:.4rem 1rem;border-radius:50px;margin-bottom:1.3rem}
+.art-hero h1{font-size:clamp(2rem,4.4vw,3rem);line-height:1.15;margin-bottom:1.2rem;max-width:18ch}
+.meta{display:flex;gap:1.5rem;flex-wrap:wrap;color:rgba(255,255,255,.7);font-size:.88rem}
+.meta span{display:inline-flex;align-items:center;gap:.45rem}
+/* body */
+.art-body{padding:3.5rem 0 2rem}
+.art-body p{margin-bottom:1.3rem;color:#2a3744;font-size:1.06rem}
+.art-body h2{font-size:1.5rem;color:var(--navy);margin:2.4rem 0 1rem}
+.lead{font-size:1.2rem!important;color:var(--navy)!important;font-weight:500;border-left:3px solid var(--green);padding-left:1.2rem}
+.pull{background:var(--green-soft);border-radius:14px;padding:1.4rem 1.6rem;font-style:italic;color:var(--navy);margin:2rem 0;font-size:1.05rem}
+.art-body ul{margin:0 0 1.3rem 1.2rem;color:#2a3744}
+.art-body li{margin-bottom:.6rem}
+/* CTA */
+.cta{background:linear-gradient(135deg,var(--navy),var(--navy-2));border-radius:22px;padding:2.6rem;color:#fff;text-align:center;margin:3rem 0;box-shadow:var(--shadow)}
+.cta h3{font-size:1.6rem;margin-bottom:.6rem}
+.cta p{color:rgba(255,255,255,.8);font-weight:300;margin-bottom:1.5rem}
+.btn{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 1.8rem;border-radius:50px;font-weight:600;background:linear-gradient(120deg,var(--green),var(--green-2));color:#fff;box-shadow:0 12px 26px -10px rgba(76,162,47,.7);transition:.25s}
+.btn:hover{transform:translateY(-3px)}
+/* more articles */
+.more-band{background:var(--bg-soft);padding:3rem 0;border-top:1px solid var(--line)}
+.more-band h4{font-family:'Inter';font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:1.2rem;text-align:center}
+.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.mini{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.5rem;transition:.3s}
+.mini:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.mini span{font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);font-weight:700}
+.mini h5{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-top:.4rem}
+footer{background:#0a1d34;color:rgba(255,255,255,.6);padding:2.5rem 0;text-align:center;font-size:.85rem;font-weight:300}
+footer a{color:var(--green-2)}
+@media(max-width:640px){.more-grid{grid-template-columns:1fr}.cta{padding:1.8rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="pbar"></div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <svg width="38" height="38" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#6cba3a" stroke-width="6"/><g stroke="#163a63" stroke-width="4" fill="none" stroke-linecap="round"><line x1="50" y1="26" x2="50" y2="60"/><line x1="32" y1="35" x2="68" y2="35"/></g><circle cx="50" cy="24" r="5" fill="#163a63"/><path d="M50 78c-9-2-16-8-16-18 10 0 17 6 16 18z" fill="#6cba3a"/><path d="M50 78c9-2 16-8 16-18-10 0-17 6-16 18z" fill="#5aa830"/></svg>
+      <b><span class="a">Lex</span><span class="g">Conformis</span></b>
+    </a>
+    <a href="index.html#blog" class="back">← Retour au blog</a>
+  </div>
+</header>
+
+<section class="art-hero">
+  <div class="wrap">
+    <span class="tag">Droit de la famille</span>
+    <h1>Mariage, divorce & succession : ce que dit le droit de la famille</h1>
+    <div class="meta">
+      <span>✍️ LexConformis Firm</span>
+      <span>⏱️ 4 min de lecture</span>
+    </div>
+  </div>
+</section>
+
+<article class="art-body">
+  <div class="wrap">
+    <p class="lead">Le droit de la famille est une branche importante du droit privé qui régit les individus unis par un lien de parenté, d'alliance ou d'adoption.</p>
+
+    <h2>La parenté : filiation, adoption et autorité parentale</h2>
+    <p>Concernant la parenté, le droit de la famille encadre les relations entre ascendants et descendants et règle les litiges entre parents, enfants et grands-parents. Il établit les règles de filiation, d'adoption et détermine les conséquences de l'autorité parentale.</p>
+
+    <h2>L'alliance : mariage, concubinage et rupture</h2>
+    <p>S'agissant des liens d'alliance, il fixe les règles relatives au mariage, au concubinage et à leur rupture. Il encadre ainsi les conditions et les effets du mariage.</p>
+
+    <div class="pull">Le droit de la famille est un domaine vaste qui nécessite l'avis d'un expert pour prendre les meilleures décisions.</div>
+
+    <h2>Comment LexConformis Firm vous accompagne</h2>
+    <p>Que vous soyez confronté à une question de mariage, de divorce, de succession ou de filiation, nos conseillers vous assistent pour toutes les questions relatives à vos droits et vous proposent des solutions adaptées à votre situation.</p>
+
+    <div class="cta">
+      <h3>Une question sur votre situation familiale ?</h3>
+      <p>Nos conseillers vous répondent en un clic, en toute confidentialité.</p>
+      <a href="index.html#contact" class="btn">Consultez-nous →</a>
+    </div>
+  </div>
+</article>
+
+<section class="more-band">
+  <div class="wrap" style="width:min(820px,92%)">
+    <h4>À lire aussi</h4>
+    <div class="more-grid">
+      <a href="article-droit-travail.html" class="mini"><span>Droit du travail</span><h5>Contrat & licenciement en RDC</h5></a>
+      <a href="article-etudes-environnementales.html" class="mini"><span>Environnement</span><h5>L'EIES, étape clé de votre projet</h5></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="width:min(1120px,92%)">© 2026 LexConformis Sarlu — <a href="index.html">Retour à l'accueil</a></div>
+</footer>
+
+<script>
+const pb=document.getElementById('pbar');
+addEventListener('scroll',()=>{const h=document.documentElement;pb.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';});
+</script>
+</body>
+</html>
