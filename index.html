@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexConformis Firm — Conseil Juridique & Environnemental en RDC</title>
+<meta name="description" content="LexConformis Firm, bureau de conseil juridique et environnemental en ligne en RDC. Consultations juridiques, études environnementales et obtention du Certificat Environnemental.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f2c4c;
+  --navy-2:#163a63;
+  --navy-soft:#1d4a7a;
+  --green:#4ca22f;
+  --green-2:#6cba3a;
+  --green-soft:#eaf6e6;
+  --ink:#14202e;
+  --muted:#5e6b78;
+  --bg:#ffffff;
+  --bg-soft:#f6f9fc;
+  --line:#e6edf3;
+  --shadow:0 18px 50px -18px rgba(15,44,76,.28);
+  --shadow-sm:0 8px 24px -10px rgba(15,44,76,.22);
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+a{text-decoration:none;color:inherit}
+img,svg{display:block;max-width:100%}
+.wrap{width:min(1180px,92%);margin-inline:auto}
+section{position:relative}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:.55rem;padding:.85rem 1.6rem;border-radius:50px;font-weight:600;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,background .25s ease;position:relative;overflow:hidden}
+.btn-primary{background:linear-gradient(120deg,var(--green),var(--green-2));color:#fff;box-shadow:0 12px 26px -10px rgba(76,162,47,.7)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 34px -10px rgba(76,162,47,.85)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.45);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(255,255,255,.22);transform:translateY(-3px)}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-dark:hover{background:var(--navy-2);transform:translateY(-3px)}
+
+/* ---------- Header / Nav ---------- */
+header{position:fixed;inset:0 0 auto 0;z-index:100;padding:1.1rem 0;transition:.35s ease;background:transparent}
+header.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(14px);box-shadow:0 8px 30px -18px rgba(15,44,76,.4);padding:.6rem 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand .logo-mark{width:46px;height:46px;flex:none}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-text b{font-family:'Playfair Display',serif;font-size:1.25rem;letter-spacing:.3px}
+.brand-text b .a{color:var(--navy)}
+.brand-text b .b{color:var(--green)}
+.brand-text span{font-size:.58rem;letter-spacing:3px;color:var(--muted);margin-top:3px;font-weight:600}
+header:not(.scrolled) .brand-text b .a{color:#fff}
+header:not(.scrolled) .brand-text b .b{color:var(--green-2)}
+header:not(.scrolled) .brand-text span{color:rgba(255,255,255,.75)}
+.menu{display:flex;align-items:center;gap:2rem;list-style:none}
+.menu a{font-size:.92rem;font-weight:500;color:#fff;opacity:.92;position:relative;transition:.25s}
+header.scrolled .menu a{color:var(--ink)}
+.menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--green-2);transition:.3s}
+.menu a:hover::after{width:100%}
+.menu a:hover{opacity:1}
+.nav-cta{display:inline-flex}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.burger span{width:26px;height:2.5px;background:#fff;border-radius:2px;transition:.3s}
+header.scrolled .burger span{background:var(--navy)}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 0 4rem;background:
+  radial-gradient(1200px 600px at 80% -10%,rgba(108,186,58,.22),transparent 60%),
+  radial-gradient(900px 500px at -10% 30%,rgba(29,74,122,.55),transparent 55%),
+  linear-gradient(135deg,#0c2440 0%,#0f2c4c 45%,#15375f 100%);
+  color:#fff;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:26px 26px;opacity:.6}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center;position:relative;z-index:2}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--green-2);background:rgba(108,186,58,.12);border:1px solid rgba(108,186,58,.35);padding:.45rem 1rem;border-radius:50px;margin-bottom:1.4rem}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--green-2);box-shadow:0 0 0 4px rgba(108,186,58,.25)}
+.hero h1{font-size:clamp(2.3rem,4.6vw,3.6rem);line-height:1.1;font-weight:800;margin-bottom:1.3rem}
+.hero h1 .hl{position:relative;color:var(--green-2)}
+.hero p.lead{font-size:1.12rem;color:rgba(255,255,255,.82);max-width:30rem;margin-bottom:2rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-stats{display:flex;gap:2.2rem;margin-top:3rem}
+.hero-stats .s b{font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;display:block}
+.hero-stats .s span{font-size:.82rem;color:rgba(255,255,255,.65)}
+.hero-card{position:relative;z-index:2}
+.glass{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:2rem;backdrop-filter:blur(16px);box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.glass h3{font-size:1.15rem;margin-bottom:1.2rem;color:#fff}
+.glass .row{display:flex;align-items:flex-start;gap:.9rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.glass .row:last-child{border:none}
+.glass .ico{width:38px;height:38px;flex:none;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff}
+.glass .row b{font-size:.95rem;color:#fff;font-weight:600}
+.glass .row span{font-size:.82rem;color:rgba(255,255,255,.7)}
+.hero-float{position:absolute;border-radius:50%;filter:blur(2px)}
+
+/* wave divider */
+.wave{position:absolute;bottom:-1px;left:0;width:100%;line-height:0;z-index:3}
+
+/* ---------- Section title ---------- */
+.sec{padding:6rem 0}
+.sec-head{text-align:center;max-width:46rem;margin:0 auto 3.5rem}
+.kicker{font-size:.78rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--green);margin-bottom:.8rem}
+.sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);color:var(--navy);line-height:1.15;margin-bottom:1rem}
+.sec-head p{color:var(--muted);font-size:1.05rem;font-weight:300}
+
+/* ---------- Services ---------- */
+.bg-soft{background:var(--bg-soft)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:2.1rem;transition:.4s cubic-bezier(.2,.7,.3,1);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--navy),var(--navy-2));opacity:0;transition:.4s;z-index:0}
+.card>*{position:relative;z-index:1;transition:.35s}
+.card:hover{transform:translateY(-10px);box-shadow:var(--shadow);border-color:transparent}
+.card:hover::before{opacity:1}
+.card:hover h3,.card:hover p{color:#fff}
+.card:hover .c-ico{background:rgba(255,255,255,.16)}
+.card .c-ico{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--green-soft),#dff0d8);color:var(--green);margin-bottom:1.3rem;transition:.35s}
+.card:hover .c-ico svg{stroke:#fff}
+.card h3{font-size:1.25rem;color:var(--navy);margin-bottom:.7rem}
+.card p{color:var(--muted);font-size:.95rem;font-weight:300}
+.card .more{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.1rem;font-weight:600;font-size:.88rem;color:var(--green)}
+.card:hover .more{color:var(--green-2)}
+
+/* ---------- Domaines ---------- */
+.dom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.dom{position:relative;border-radius:var(--radius);overflow:hidden;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem;color:#fff;isolation:isolate;cursor:pointer}
+.dom::after{content:"";position:absolute;inset:0;z-index:-1;transition:.5s;transform:scale(1)}
+.dom::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(10,30,52,.92) 10%,rgba(10,30,52,.35) 70%,rgba(10,30,52,.15));transition:.4s}
+.dom:hover::after{transform:scale(1.08)}
+.dom:hover::before{background:linear-gradient(to top,rgba(76,162,47,.92) 5%,rgba(15,44,76,.55) 65%)}
+.dom .num{font-family:'Playfair Display',serif;font-size:.95rem;opacity:.7;margin-bottom:.4rem}
+.dom h3{font-size:1.3rem;margin-bottom:.5rem}
+.dom p{font-size:.88rem;opacity:.85;font-weight:300;max-height:0;overflow:hidden;transition:.45s ease;opacity:0}
+.dom:hover p{max-height:120px;opacity:.9;margin-top:.3rem}
+.d1::after{background:linear-gradient(135deg,#1d4a7a,#0f2c4c)}
+.d2::after{background:linear-gradient(135deg,#2c6b4f,#16493a)}
+.d3::after{background:linear-gradient(135deg,#244e7d,#13314f)}
+.d4::after{background:linear-gradient(135deg,#3a7a3f,#225227)}
+.d5::after{background:linear-gradient(135deg,#1f3f66,#16304d)}
+.d6::after{background:linear-gradient(135deg,#4ca22f,#2c6b1f)}
+.dom .ico-bg{position:absolute;top:1.4rem;right:1.4rem;opacity:.22;z-index:-1}
+
+/* ---------- Steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;counter-reset:step}
+.step{text-align:center;position:relative;padding:1rem}
+.step .circle{width:74px;height:74px;margin:0 auto 1.2rem;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--line);color:var(--navy);position:relative;transition:.35s;box-shadow:var(--shadow-sm)}
+.step:hover .circle{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;border-color:transparent;transform:translateY(-6px)}
+.step:hover .circle svg{stroke:#fff}
+.step .circle::after{counter-increment:step;content:counter(step);position:absolute;top:-8px;right:-8px;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-size:.85rem;font-weight:700;display:grid;place-items:center;font-family:'Inter'}
+.step h3{font-size:1.1rem;color:var(--navy);margin-bottom:.5rem}
+.step p{font-size:.9rem;color:var(--muted);font-weight:300}
+.steps-line{position:absolute;top:37px;left:12%;right:12%;height:2px;background:linear-gradient(90deg,var(--line),var(--green),var(--line));z-index:0}
+
+/* ---------- About / split ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.about-visual{position:relative}
+.about-badge{position:relative;background:linear-gradient(135deg,var(--navy),var(--navy-2));border-radius:24px;padding:3rem 2.5rem;color:#fff;overflow:hidden;box-shadow:var(--shadow)}
+.about-badge::before{content:"";position:absolute;width:240px;height:240px;background:radial-gradient(circle,rgba(108,186,58,.35),transparent 70%);top:-60px;right:-60px}
+.about-badge .big-logo{width:120px;margin-bottom:1.5rem}
+.about-badge .vlist{list-style:none;display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
+.about-badge .vlist li{display:flex;gap:.8rem;align-items:flex-start;font-size:.95rem;color:rgba(255,255,255,.9);font-weight:300}
+.about-badge .vlist .chk{flex:none;width:24px;height:24px;border-radius:50%;background:var(--green);display:grid;place-items:center}
+.about-text .kicker{text-align:left}
+.about-text h2{text-align:left;font-size:clamp(1.8rem,3.2vw,2.5rem);color:var(--navy);margin-bottom:1.2rem;line-height:1.2}
+.about-text p{color:var(--muted);margin-bottom:1.1rem;font-weight:300}
+.values{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.8rem}
+.value{display:flex;gap:.8rem;align-items:flex-start}
+.value .vi{flex:none;width:42px;height:42px;border-radius:12px;background:var(--green-soft);display:grid;place-items:center;color:var(--green)}
+.value b{display:block;color:var(--navy);font-size:.98rem}
+.value span{font-size:.84rem;color:var(--muted)}
+
+/* ---------- Environnement highlight ---------- */
+.env{background:
+  radial-gradient(800px 400px at 90% 10%,rgba(108,186,58,.25),transparent 60%),
+  linear-gradient(135deg,#16493a 0%,#1c5a3f 100%);
+  color:#fff;border-radius:28px;padding:3.5rem;display:grid;grid-template-columns:1.3fr .7fr;gap:2.5rem;align-items:center;overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.env h2{color:#fff;font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:1rem}
+.env p{color:rgba(255,255,255,.85);font-weight:300;margin-bottom:1.5rem}
+.env .law{background:rgba(255,255,255,.1);border-left:3px solid var(--green-2);padding:1rem 1.3rem;border-radius:10px;font-size:.9rem;font-style:italic;color:rgba(255,255,255,.9)}
+.env-leaf{display:grid;place-items:center}
+.env-leaf svg{width:160px;opacity:.92;filter:drop-shadow(0 12px 30px rgba(0,0,0,.3))}
+
+/* ---------- Blog ---------- */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+.post{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.35s}
+.post:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.post .thumb{height:160px;display:grid;place-items:center;position:relative;overflow:hidden}
+.post .thumb svg{width:70px;color:#fff;opacity:.9;transition:.5s}
+.post:hover .thumb svg{transform:scale(1.12) rotate(-4deg)}
+.post .body{padding:1.5rem}
+.post .tag{font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);font-weight:700}
+.post h3{font-size:1.12rem;color:var(--navy);margin:.6rem 0 .5rem}
+.post p{font-size:.88rem;color:var(--muted);font-weight:300}
+.post .read{margin-top:1rem;font-size:.85rem;color:var(--navy);font-weight:600;display:inline-flex;gap:.4rem;align-items:center}
+
+/* ---------- Contact ---------- */
+.contact-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:0;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:#fff;border:1px solid var(--line)}
+.contact-info{background:linear-gradient(160deg,var(--navy) 0%,#0c2440 100%);color:#fff;padding:3rem 2.5rem;position:relative;overflow:hidden}
+.contact-info::before{content:"";position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(108,186,58,.3),transparent 70%);bottom:-50px;left:-50px}
+.contact-info h3{font-size:1.5rem;margin-bottom:.6rem}
+.contact-info>p{color:rgba(255,255,255,.75);font-weight:300;margin-bottom:2rem;font-size:.95rem}
+.cinfo{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.4rem;position:relative;z-index:2}
+.cinfo .ci{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.1);display:grid;place-items:center;color:var(--green-2)}
+.cinfo b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.6);margin-bottom:.2rem;font-weight:600}
+.cinfo span{font-size:.95rem;color:#fff;word-break:break-word}
+.contact-info a{color:#fff}
+.contact-form{padding:3rem 2.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:.45rem}
+.field input,.field textarea,.field select{width:100%;padding:.85rem 1rem;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:.93rem;color:var(--ink);background:var(--bg-soft);transition:.25s;outline:none}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 4px rgba(76,162,47,.12)}
+.field textarea{resize:vertical;min-height:120px}
+.form-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.form-note{font-size:.78rem;color:var(--muted);margin-top:1rem}
+
+/* ---------- Footer ---------- */
+footer{background:#0a1d34;color:rgba(255,255,255,.7);padding:4rem 0 1.5rem;font-weight:300}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:3rem}
+.foot-brand .brand-text b .a{color:#fff}.foot-brand .brand-text b .b{color:var(--green-2)}
+.foot-brand .brand-text span{color:rgba(255,255,255,.5)}
+.foot-brand p{margin-top:1.2rem;font-size:.9rem;max-width:22rem}
+.foot-col h4{color:#fff;font-size:1rem;margin-bottom:1.2rem;font-family:'Inter';font-weight:600}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.foot-col a,.foot-col li{font-size:.9rem;transition:.25s}
+.foot-col a:hover{color:var(--green-2);padding-left:4px}
+.bank{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.2rem;font-size:.82rem;line-height:1.9}
+.bank b{color:#fff}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.82rem}
+.foot-bottom a{color:rgba(255,255,255,.6)}
+.foot-bottom a:hover{color:var(--green-2)}
+
+/* ---------- WhatsApp float ---------- */
+.wa-float{position:fixed;bottom:26px;right:26px;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 30px -6px rgba(37,211,102,.6);z-index:90;transition:.3s;animation:pulse 2.4s infinite}
+.wa-float:hover{transform:scale(1.1)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+
+/* ---------- Reveal animations ---------- */
+.reveal{opacity:0;transform:translateY(40px);transition:.8s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}.reveal.d5{transition-delay:.5s}
+
+/* ---------- Modal (CGU) ---------- */
+.modal{position:fixed;inset:0;background:rgba(10,29,52,.7);backdrop-filter:blur(4px);z-index:200;display:none;align-items:center;justify-content:center;padding:5%}
+.modal.open{display:flex}
+.modal-box{background:#fff;border-radius:20px;max-width:720px;width:100%;max-height:84vh;overflow-y:auto;padding:2.5rem;position:relative;box-shadow:var(--shadow)}
+.modal-box h2{color:var(--navy);font-size:1.8rem;margin-bottom:.4rem}
+.modal-box h4{color:var(--green);margin-top:1.4rem;margin-bottom:.3rem;font-family:'Inter';font-size:1rem}
+.modal-box p{color:var(--muted);font-size:.92rem;font-weight:300;margin-bottom:.5rem}
+.modal-close{position:absolute;top:1.2rem;right:1.2rem;width:38px;height:38px;border-radius:50%;border:none;background:var(--bg-soft);cursor:pointer;font-size:1.2rem;color:var(--navy);transition:.25s}
+.modal-close:hover{background:var(--green);color:#fff;transform:rotate(90deg)}
+
+/* ---------- Responsive ---------- */
+@media(max-width:980px){
+  .hero-grid,.split,.contact-wrap,.env{grid-template-columns:1fr}
+  .cards,.dom-grid,.blog-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps-line{display:none}
+  .values{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .env-leaf{order:-1}
+  .hero-card{margin-top:1rem}
+}
+@media(max-width:680px){
+  .menu{position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;background:var(--navy);flex-direction:column;justify-content:center;gap:1.8rem;transform:translateX(100%);transition:.4s;box-shadow:-20px 0 60px rgba(0,0,0,.4);z-index:120}
+  .menu.open{transform:none}
+  .menu a{color:#fff;font-size:1.1rem}
+  .burger{display:flex;z-index:130}
+  .nav-cta{display:none}
+  .cards,.dom-grid,.blog-grid,.steps,.values,.foot-grid,.form-row{grid-template-columns:1fr}
+  .hero-stats{gap:1.4rem;flex-wrap:wrap}
+  .sec{padding:4rem 0}
+  .env,.about-badge{padding:2rem}
+  .contact-form,.contact-info{padding:2rem 1.6rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="header">
+  <div class="wrap nav">
+    <a href="#accueil" class="brand">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-label="LexConformis">
+        <defs>
+          <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#163a63"/><stop offset="1" stop-color="#6cba3a"/>
+          </linearGradient>
+          <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#6cba3a"/><stop offset="1" stop-color="#3a8a2a"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="44" fill="none" stroke="url(#ring)" stroke-width="5"/>
+        <!-- scales -->
+        <g stroke="#163a63" stroke-width="3" fill="none" stroke-linecap="round">
+          <line x1="50" y1="24" x2="50" y2="60"/>
+          <line x1="30" y1="34" x2="70" y2="34"/>
+          <line x1="30" y1="34" x2="22" y2="50"/><line x1="30" y1="34" x2="38" y2="50"/>
+          <line x1="70" y1="34" x2="62" y2="50"/><line x1="70" y1="34" x2="78" y2="50"/>
+          <path d="M21 50a9 6 0 0 0 18 0" fill="#163a63" stroke="none"/>
+          <path d="M61 50a9 6 0 0 0 18 0" fill="#163a63" stroke="none"/>
+        </g>
+        <circle cx="50" cy="23" r="4.5" fill="#163a63"/>
+        <circle cx="30" cy="34" r="3.5" fill="#163a63"/>
+        <circle cx="70" cy="34" r="3.5" fill="#163a63"/>
+        <!-- leaf -->
+        <path d="M50 78c-10-2-18-9-18-20 11 0 19 7 18 20z" fill="url(#leaf)"/>
+        <path d="M50 78c10-2 18-9 18-20-11 0-19 7-18 20z" fill="#5aa830"/>
+        <line x1="50" y1="60" x2="50" y2="78" stroke="#3a8a2a" stroke-width="1.5"/>
+      </svg>
+      <span class="brand-text"><b><span class="a">Lex</span><span class="b">Conformis</span></b><span>DROIT · CONFORMITÉ · ENVIRONNEMENT</span></span>
+    </a>
+    <ul class="menu" id="menu">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#domaines">Domaines</a></li>
+      <li><a href="#process">Comment ça marche</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary nav-cta">Consultez-nous</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="accueil">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="dot"></span>Bureau de conseil en ligne · RDC</span>
+      <h1>Un <span class="hl">conseil juridique</span> et environnemental, en un clic.</h1>
+      <p class="lead">LexConformis Firm vous accompagne dans toutes les branches du droit public et privé, et réalise vos études environnementales jusqu'à l'obtention du Certificat Environnemental.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Demander un conseil
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#services" class="btn btn-ghost">Nos services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="s reveal d1"><b>6+</b><span>Domaines du droit</span></div>
+        <div class="s reveal d2"><b>100%</b><span>En ligne</span></div>
+        <div class="s reveal d3"><b>24/7</b><span>Demandes reçues</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="glass">
+        <h3>Pourquoi nous choisir ?</h3>
+        <div class="row"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>Écoute & réactivité</b><br><span>Analyse approfondie, réponses précises.</span></div></div>
+        <div class="row"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><div><b>Confidentialité totale</b><br><span>Transparence, intégrité, secret professionnel.</span></div></div>
+        <div class="row"><span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Disponibilité accrue</b><br><span>Où que vous soyez, à toute heure.</span></div></div>
+        <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:1.4rem">Contacter un conseiller</a>
+      </div>
+    </div>
+  </div>
+  <div class="wave">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="width:100%;height:70px"><path fill="#ffffff" d="M0,40 C360,90 720,0 1080,30 C1260,45 1380,60 1440,50 L1440,80 L0,80 Z"/></svg>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Nos prestations en ligne</div>
+      <h2>Une assistance experte, simple et accessible</h2>
+      <p>Nos conseillers spécialisés en droit et en environnement vous apportent des solutions adaptées en quelques clics, partout en RDC et à l'international.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal d1">
+        <div class="c-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ca22f" stroke-width="1.8"><path d="M12 3 4 7v6c0 5 8 8 8 8s8-3 8-8V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Conseil Juridique</h3>
+        <p>Votre vie professionnelle ou sociale peut engendrer des situations nécessitant l'avis d'un expert. Nous vous guidons dans vos démarches.</p>
+        <span class="more">En savoir plus →</span>
+      </article>
+      <article class="card reveal d2">
+        <div class="c-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ca22f" stroke-width="1.8"><path d="M8 2h8l4 4v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M8 10h8M8 14h8M8 18h5"/></svg></div>
+        <h3>Consultation Juridique</h3>
+        <p>LexConformis Firm offre des consultations juridiques aux personnes physiques et morales, en droit privé comme en droit public.</p>
+        <span class="more">En savoir plus →</span>
+      </article>
+      <article class="card reveal d3">
+        <div class="c-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ca22f" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9 6a5 5 0 0 1 10 1c0 1 0 2-1 3"/><path d="M12 20V8M12 12l3-3M12 14l-2-2"/></svg></div>
+        <h3>Études Environnementales</h3>
+        <p>Nos experts réalisent vos études d'impact (EIES, PMC-ES) conformément à la loi 11/009 du 9 juillet 2011, jusqu'au Certificat Environnemental.</p>
+        <span class="more">En savoir plus →</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="sec bg-soft">
+  <div class="wrap split">
+    <div class="about-visual reveal">
+      <div class="about-badge">
+        <svg class="big-logo" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#6cba3a" stroke-width="4" opacity=".9"/>
+          <g stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round">
+            <line x1="50" y1="24" x2="50" y2="60"/><line x1="30" y1="34" x2="70" y2="34"/>
+            <line x1="30" y1="34" x2="22" y2="50"/><line x1="30" y1="34" x2="38" y2="50"/>
+            <line x1="70" y1="34" x2="62" y2="50"/><line x1="70" y1="34" x2="78" y2="50"/>
+            <path d="M21 50a9 6 0 0 0 18 0" fill="#fff" stroke="none"/>
+            <path d="M61 50a9 6 0 0 0 18 0" fill="#fff" stroke="none"/>
+          </g>
+          <circle cx="50" cy="23" r="4.5" fill="#fff"/><circle cx="30" cy="34" r="3.5" fill="#fff"/><circle cx="70" cy="34" r="3.5" fill="#fff"/>
+          <path d="M50 78c-10-2-18-9-18-20 11 0 19 7 18 20z" fill="#6cba3a"/>
+          <path d="M50 78c10-2 18-9 18-20-11 0-19 7-18 20z" fill="#5aa830"/>
+        </svg>
+        <h3 class="serif" style="font-size:1.5rem;margin-bottom:.5rem">Notre engagement</h3>
+        <p style="color:rgba(255,255,255,.8);font-weight:300">Vous garantir une expertise fiable, réactive et confidentielle.</p>
+        <ul class="vlist">
+          <li><span class="chk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Écoute attentive & analyse approfondie</li>
+          <li><span class="chk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Réactivité efficace & réponses précises</li>
+          <li><span class="chk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Transparence, confidentialité & intégrité</li>
+        </ul>
+      </div>
+    </div>
+    <div class="about-text reveal d2">
+      <div class="kicker">Qui sommes-nous ?</div>
+      <h2>Un bureau de conseil juridique & environnemental en ligne</h2>
+      <p>LexConformis Firm a été mis en place pour fournir à ses clients les informations et l'assistance dont ils ont besoin dans divers domaines du droit, ainsi que pour la réalisation d'études environnementales.</p>
+      <p>Ce service s'adresse aux personnes n'ayant pas la possibilité de consulter un avocat en raison de contraintes de temps, de localisation ou de budget. Si votre demande nécessite un avocat spécialisé, nous vous mettons en relation avec un praticien compétent.</p>
+      <div class="values">
+        <div class="value"><span class="vi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ca22f" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></span><div><b>Informations gratuites</b><span>Renseignements juridiques en ligne.</span></div></div>
+        <div class="value"><span class="vi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ca22f" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></span><div><b>Conseil personnalisé</b><span>Un accompagnement sur mesure.</span></div></div>
+        <div class="value"><span class="vi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ca22f" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><div><b>Études & conformité</b><span>EIES, PMC-ES, certification.</span></div></div>
+        <div class="value"><span class="vi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ca22f" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div><b>Réactivité 24/7</b><span>Demandes reçues à tout moment.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOMAINES ============ -->
+<section class="sec" id="domaines">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Domaines d'intervention</div>
+      <h2>Que ce soit en droit privé ou public, nous vous assistons</h2>
+      <p>Survolez chaque domaine pour en savoir plus sur notre accompagnement.</p>
+    </div>
+    <div class="dom-grid">
+      <article class="dom d1 reveal d1"><span class="num">01</span><h3>Droit de la famille</h3><p>Mariage, divorce, succession, filiation, adoption, autorité parentale — des solutions adaptées à vos droits.</p></article>
+      <article class="dom d2 reveal d2"><span class="num">02</span><h3>Droit du travail</h3><p>De la conclusion du contrat à sa rupture. Nous assistons employeurs et employés selon le Code du travail de la RDC.</p></article>
+      <article class="dom d3 reveal d3"><span class="num">03</span><h3>Droit des sociétés</h3><p>De la création à la liquidation : statuts, augmentation de capital, fusion et toutes opérations de la société.</p></article>
+      <article class="dom d4 reveal d1"><span class="num">04</span><h3>Droit des biens</h3><p>Biens meubles et immeubles — que vous soyez propriétaire ou professionnel du secteur.</p></article>
+      <article class="dom d5 reveal d2"><span class="num">05</span><h3>Droit des contrats</h3><p>Rédaction, exécution, relecture et résiliation. Nous vous aidons à faire valoir vos droits en cas de litige.</p></article>
+      <article class="dom d6 reveal d3"><span class="num">06</span><h3>Études environnementales</h3><p>Accompagnement en amont et en aval pour l'obtention de votre Certificat Environnemental.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENVIRONNEMENT HIGHLIGHT ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="env reveal">
+      <div>
+        <div class="kicker" style="color:var(--green-2)">Conformité environnementale</div>
+        <h2>Obtenez votre Certificat Environnemental en toute sérénité</h2>
+        <p>Avant tout projet de développement, d'infrastructure ou d'exploitation, une Étude d'Impact Environnemental et Social (EIES) est requise. Pour un projet déjà opérationnel, un Plan de Mise en Conformité (PMC-ES) est nécessaire. Nous rédigeons et suivons tout le processus de validation auprès de l'Agence Congolaise de l'Environnement.</p>
+        <div class="law">« Tout projet susceptible d'avoir un impact sur l'environnement est assujetti à une étude d'impact environnemental et social… » — Art. 21, Loi 11/009 du 9 juillet 2011.</div>
+        <a href="#contact" class="btn btn-primary" style="margin-top:1.6rem">Demander une étude</a>
+      </div>
+      <div class="env-leaf">
+        <svg viewBox="0 0 120 140" fill="none">
+          <path d="M60 130C30 124 8 100 8 62 48 62 78 86 60 130Z" fill="#6cba3a"/>
+          <path d="M60 130C90 124 112 100 112 62 72 62 42 86 60 130Z" fill="#88cf52"/>
+          <line x1="60" y1="60" x2="60" y2="130" stroke="#2c6b1f" stroke-width="2.5"/>
+          <path d="M60 90 38 80M60 105 42 98M60 90 82 80M60 105 78 98" stroke="#2c6b1f" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="sec bg-soft" id="process">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Comment ça marche</div>
+      <h2>Consultez nos conseillers en ligne, où que vous soyez</h2>
+      <p>Un processus simple et transparent, conçu pour vous faire gagner du temps.</p>
+    </div>
+    <div class="steps" style="position:relative">
+      <div class="steps-line"></div>
+      <div class="step reveal d1">
+        <div class="circle"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Exposez votre situation</h3>
+        <p>Cliquez sur « Consultez-nous » et décrivez votre demande via notre formulaire.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="circle"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Analyse par un expert</h3>
+        <p>Un conseiller spécialisé étudie votre dossier dans la branche du droit concernée.</p>
+      </div>
+      <div class="step reveal d3">
+        <div class="circle"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></div>
+        <h3>Réponse claire & précise</h3>
+        <p>Vous recevez un retour par email, avec des solutions adaptées à votre cas.</p>
+      </div>
+      <div class="step reveal d4">
+        <div class="circle"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11l-3 3-1.5-1.5"/></svg></div>
+        <h3>Mise en relation</h3>
+        <p>Si besoin, nous vous orientons vers un avocat spécialisé et compétent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section class="sec" id="blog">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Notre blog</div>
+      <h2>Restez informé des évolutions légales</h2>
+      <p>Des articles juridiques publiés régulièrement pour vous tenir au courant des nouveautés légales et réglementaires en RDC.</p>
+    </div>
+    <div class="blog-grid">
+      <article class="post reveal d1">
+        <div class="thumb" style="background:linear-gradient(135deg,#1d4a7a,#0f2c4c)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="body"><span class="tag">Droit de la famille</span><h3>Mariage, divorce & succession</h3><p>Comprendre les règles de filiation, d'alliance et leurs conséquences juridiques.</p><span class="read">Lire l'article →</span></div>
+      </article>
+      <article class="post reveal d2">
+        <div class="thumb" style="background:linear-gradient(135deg,#2c6b4f,#16493a)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="body"><span class="tag">Droit du travail</span><h3>Contrat & licenciement en RDC</h3><p>Vos droits et obligations selon le Code du travail, pour employés et employeurs.</p><span class="read">Lire l'article →</span></div>
+      </article>
+      <article class="post reveal d3">
+        <div class="thumb" style="background:linear-gradient(135deg,#3a7a3f,#225227)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M11 20A7 7 0 0 1 9 6a5 5 0 0 1 10 1c0 1 0 2-1 3"/><path d="M12 20V8"/></svg></div>
+        <div class="body"><span class="tag">Environnement</span><h3>L'EIES, étape clé de votre projet</h3><p>Pourquoi l'étude d'impact est indispensable avant tout projet de développement.</p><span class="read">Lire l'article →</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="sec bg-soft" id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Consultez-nous</div>
+      <h2>Parlons de votre situation</h2>
+      <p>Remplissez le formulaire ci-dessous : votre message sera transmis à nos conseillers qui vous répondront dans les meilleurs délais.</p>
+    </div>
+    <div class="contact-wrap reveal">
+      <div class="contact-info">
+        <h3 class="serif">Nos coordonnées</h3>
+        <p>Une boîte email à votre disposition pour recevoir et traiter vos demandes efficacement.</p>
+        <div class="cinfo"><span class="ci"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6cba3a" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><b>Adresse</b><span>Avenue Kasongo Lunda, appartement n°1A, C/Lingwala — Kinshasa, RDC</span></div></div>
+        <div class="cinfo"><span class="ci"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6cba3a" stroke-width="1.8"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6 12 13 2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></span><div><b>Email</b><span><a href="mailto:info@lexco.com">info@lexco.com</a><br><a href="mailto:F.tende@lexco.com">F.tende@lexco.com</a><br><a href="mailto:C.M.kalala@lexco.com">C.M.kalala@lexco.com</a></span></div></div>
+        <div class="cinfo"><span class="ci"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6cba3a" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><b>Téléphone & WhatsApp</b><span><a href="tel:+243812475061">+243 812 475 061</a><br><a href="tel:+27618971391">+27 618 971 391</a></span></div></div>
+        <a href="https://wa.me/27618971391" target="_blank" rel="noopener" class="btn" style="background:#25d366;color:#fff;margin-top:1rem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20z"/></svg>
+          Écrire sur WhatsApp
+        </a>
+      </div>
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="field"><label for="nom">Prénom & Nom</label><input id="nom" type="text" placeholder="Votre nom complet" required></div>
+            <div class="field"><label for="tel">Téléphone</label><input id="tel" type="tel" placeholder="+243 ..."></div>
+          </div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="vous@exemple.com" required></div>
+          <div class="field"><label for="sujet">Domaine concerné</label>
+            <select id="sujet">
+              <option>Conseil juridique général</option>
+              <option>Droit de la famille</option>
+              <option>Droit du travail</option>
+              <option>Droit des sociétés</option>
+              <option>Droit des biens</option>
+              <option>Droit des contrats</option>
+              <option>Études environnementales</option>
+            </select>
+          </div>
+          <div class="field"><label for="msg">Votre message</label><textarea id="msg" placeholder="Décrivez votre situation…" required></textarea></div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Envoyer ma demande
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
+            </button>
+            <a href="https://wa.me/27618971391" target="_blank" rel="noopener" class="btn" style="background:#eaf6e6;color:#2c6b1f">via WhatsApp</a>
+          </div>
+          <p class="form-note">En envoyant ce formulaire, votre messagerie s'ouvrira pour transmettre votre demande à info@lexco.com. Confidentialité et secret professionnel garantis.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <svg class="logo-mark" viewBox="0 0 100 100" style="width:44px;height:44px">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="#6cba3a" stroke-width="5"/>
+            <g stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round">
+              <line x1="50" y1="24" x2="50" y2="60"/><line x1="30" y1="34" x2="70" y2="34"/>
+              <line x1="30" y1="34" x2="22" y2="50"/><line x1="30" y1="34" x2="38" y2="50"/>
+              <line x1="70" y1="34" x2="62" y2="50"/><line x1="70" y1="34" x2="78" y2="50"/>
+              <path d="M21 50a9 6 0 0 0 18 0" fill="#fff" stroke="none"/><path d="M61 50a9 6 0 0 0 18 0" fill="#fff" stroke="none"/>
+            </g>
+            <circle cx="50" cy="23" r="4.5" fill="#fff"/><circle cx="30" cy="34" r="3.5" fill="#fff"/><circle cx="70" cy="34" r="3.5" fill="#fff"/>
+            <path d="M50 78c-10-2-18-9-18-20 11 0 19 7 18 20z" fill="#6cba3a"/><path d="M50 78c10-2 18-9 18-20-11 0-19 7-18 20z" fill="#5aa830"/>
+          </svg>
+          <span class="brand-text"><b><span class="a">Lex</span><span class="b">Conformis</span></b><span>DROIT · CONFORMITÉ · ENVIRONNEMENT</span></span>
+        </div>
+        <p>Bureau de conseil juridique et environnemental en ligne, au service des particuliers et des entreprises en RDC.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#domaines">Domaines</a></li>
+          <li><a href="#process">Comment ça marche</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#" onclick="openCGU(event)">CGU</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@lexco.com">info@lexco.com</a></li>
+          <li><a href="tel:+243812475061">+243 812 475 061</a></li>
+          <li><a href="tel:+27618971391">+27 618 971 391</a></li>
+          <li>Av. Kasongo Lunda 1A,<br>C/Lingwala, Kinshasa</li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Coordonnées bancaires</h4>
+        <div class="bank">
+          <b>Banque :</b> First National Bank South Africa<br>
+          <b>N° de compte :</b> 63088125323<br>
+          <b>Branch Code :</b> 250655<br>
+          <b>SWIFT :</b> FIRNZAJJ
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 LexConformis Sarlu. Tous droits réservés.</span>
+      <span><a href="#" onclick="openCGU(event)">Conditions Générales d'Utilisation</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp float -->
+<a href="https://wa.me/27618971391" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20z"/></svg>
+</a>
+
+<!-- CGU Modal -->
+<div class="modal" id="cguModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeCGU()">×</button>
+    <h2 class="serif">Conditions Générales d'Utilisation</h2>
+    <p>L'accès au site implique l'acceptation pleine et entière des présentes CGU. LexConformis Firm se réserve le droit de les modifier à tout moment.</p>
+    <h4>Article 1 — Objet</h4><p>Les présentes CGU définissent les droits et obligations des prestataires et des responsables du site dans le cadre des services proposés.</p>
+    <h4>Article 2 — Description des services</h4><p>Réponse par email : vous posez une question écrite et recevez une réponse par email. Formules avec suivi : consultation avec suivi téléphonique assuré par nos experts.</p>
+    <h4>Article 3 — Conditions</h4><p>L'utilisateur doit être majeur et juridiquement capable pour souscrire aux services du site.</p>
+    <h4>Article 4 — Responsabilité</h4><p>Nous ne sommes pas responsables des problèmes techniques affectant le temps de réponse, ni des conséquences de la divulgation du contenu de nos conseils par le client.</p>
+    <h4>Article 5 — Déontologie & secret professionnel</h4><p>Nos conseils respectent la confidentialité et les obligations déontologiques conformément aux lois en vigueur.</p>
+    <h4>Article 6 — Protection des données personnelles</h4><p>Nous nous engageons à protéger vos données personnelles et à ne pas les utiliser à des fins commerciales.</p>
+    <h4>Article 7 — Modalités de paiement</h4><p>Plusieurs modes de paiement sécurisés sont proposés, y compris le transfert bancaire et les paiements en ligne cryptés.</p>
+    <h4>Article 8 — Remboursement</h4><p>Aucun remboursement n'est possible après le début de la prestation.</p>
+    <h4>Article 9 — Propriété intellectuelle</h4><p>Le contenu du site est protégé par la législation en vigueur. Toute utilisation non autorisée expose à des poursuites.</p>
+  </div>
+</div>
+
+<script>
+// Header scroll
+const header=document.getElementById('header');
+addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>40));
+
+// Burger menu
+const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+burger.addEventListener('click',()=>menu.classList.toggle('open'));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+// Reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Contact form -> mailto
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const nom=document.getElementById('nom').value,
+        tel=document.getElementById('tel').value,
+        email=document.getElementById('email').value,
+        sujet=document.getElementById('sujet').value,
+        msg=document.getElementById('msg').value;
+  const body=`Nom: ${nom}%0D%0AEmail: ${email}%0D%0ATéléphone: ${tel}%0D%0ADomaine: ${sujet}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(msg)}`;
+  window.location.href=`mailto:info@lexco.com?subject=${encodeURIComponent('Demande de conseil — '+sujet)}&body=${body}`;
+});
+
+// CGU modal
+function openCGU(e){if(e)e.preventDefault();document.getElementById('cguModal').classList.add('open');document.body.style.overflow='hidden'}
+function closeCGU(){document.getElementById('cguModal').classList.remove('open');document.body.style.overflow=''}
+document.getElementById('cguModal').addEventListener('click',e=>{if(e.target.id==='cguModal')closeCGU()});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeCGU()});
+</script>
+</body>
+</html>
