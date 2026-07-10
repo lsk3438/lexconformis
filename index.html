@@ -1053,28 +1053,45 @@
     function build(d){
       return '<div class="svc-hd'+(d.env?' env':'')+'"><div class="ic">'+d.icon+'</div><div class="kick">'+d.kick+'</div><h2>'+d.title+'</h2><p>'+d.sub+'</p></div><div class="svc-bd">'+d.body+cta+'</div>';
     }
+    function showPanel(){
+      modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';card.scrollTop=0;
+      if(anim){
+        gsap.fromTo(backdrop,{opacity:0},{opacity:1,duration:.4,ease:'power1.out'});
+        gsap.fromTo(card,{scale:.5,rotateY:-60,opacity:0,filter:'blur(12px)'},{scale:1,rotateY:0,opacity:1,filter:'blur(0px)',duration:.72,ease:'back.out(1.5)'});
+      }
+    }
     function open(key,srcCard){
       var d=DATA[key];if(!d)return;
       inner.innerHTML=build(d);
-      modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
-      card.scrollTop=0;
-      if(anim){
-        gsap.fromTo(backdrop,{opacity:0},{opacity:1,duration:.5,ease:'power1.out'});
-        // La carte cliquée fonce vers le spectateur puis disparaît
-        if(srcCard){lastCard=srcCard;gsap.set(srcCard,{transformPerspective:1200,transformOrigin:'center center'});
-          gsap.to(srcCard,{z:560,scale:1.15,rotateX:-12,opacity:0,filter:'blur(9px)',duration:.55,ease:'power2.in',onComplete:function(){srcCard.style.visibility='hidden';}});}
-        // Le panneau surgit de la profondeur (fort translateZ + bascule 3D)
-        gsap.fromTo(card,{z:-900,scale:.4,rotateX:28,y:40,opacity:0,filter:'blur(16px)'},
-          {z:0,scale:1,rotateX:0,y:0,opacity:1,filter:'blur(0px)',duration:.82,ease:'power3.out',delay:.16});
-      }
-      // close buttons inside content
-      inner.querySelectorAll('[data-close]').forEach(function(a){a.addEventListener('click',function(){close();});});
+      inner.querySelectorAll('[data-close]').forEach(function(a){a.addEventListener('click',close);});
+      if(!anim||!srcCard){showPanel();return;}
+      lastCard=srcCard;
+      var parent=srcCard.parentNode,sibs=[],rect=srcCard.getBoundingClientRect();
+      [].forEach.call(parent.children,function(c){if(c!==srcCard&&c.classList&&c.classList.contains('scard'))sibs.push(c);});
+      gsap.killTweensOf(srcCard);
+      gsap.set(srcCard,{transformPerspective:1000,transformOrigin:'center center',zIndex:200,position:'relative'});
+      var tl=gsap.timeline();
+      // 1) les autres cartes s'écartent
+      sibs.forEach(function(s){var sr=s.getBoundingClientRect();var dir=(sr.left<rect.left)?-1:1;
+        tl.to(s,{xPercent:dir*70,rotateY:dir*22,opacity:0,duration:.5,ease:'power2.out'},0);});
+      // 2) la carte recule, 3) revient en grand en tournoyant, 4) se fond dans le panneau
+      tl.to(srcCard,{z:-340,scale:.78,duration:.42,ease:'power2.in'},0)
+        .to(srcCard,{z:240,scale:1.5,rotateY:360,duration:.75,ease:'power3.out'},0.42)
+        .to(srcCard,{opacity:0,duration:.26,ease:'power1.in'},'-=0.26')
+        .add(showPanel,0.82);
     }
-    function restoreCard(){if(lastCard){if(anim)gsap.set(lastCard,{clearProps:'all'});lastCard.style.visibility='';lastCard.style.transform='';lastCard=null;}}
+    function restoreCard(){
+      if(lastCard&&lastCard.parentNode){
+        [].forEach.call(lastCard.parentNode.children,function(c){if(c.classList&&c.classList.contains('scard')){gsap.killTweensOf(c);gsap.set(c,{clearProps:'all'});}});
+      }
+      lastCard=null;
+    }
     function close(){
       function done(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';if(anim)gsap.set(card,{clearProps:'all'});restoreCard();}
-      if(anim){gsap.to(card,{z:-620,scale:.5,rotateX:22,opacity:0,filter:'blur(12px)',duration:.42,ease:'power2.in',onComplete:done});gsap.to(backdrop,{opacity:0,duration:.42});}
-      else done();
+      if(anim){
+        gsap.to(card,{scale:.5,rotateY:45,opacity:0,filter:'blur(10px)',duration:.4,ease:'power2.in',onComplete:done});
+        gsap.to(backdrop,{opacity:0,duration:.4});
+      } else done();
     }
     document.querySelectorAll('.scard').forEach(function(c){
       c.addEventListener('click',function(e){var link=c.querySelector('[data-svc]');if(!link)return;e.preventDefault();open(link.getAttribute('data-svc'),c);});
