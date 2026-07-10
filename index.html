@@ -149,7 +149,7 @@
   .why .feat span{font-size:.88rem;color:var(--muted)}
 
   /* SERVICES */
-  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;perspective:1200px}
   .scard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:34px 30px;transition:transform .25s ease,box-shadow .3s,border-color .3s;position:relative;overflow:hidden}
   .scard::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,var(--gold),var(--gold-2));transform:scaleX(0);transform-origin:left;transition:transform .35s}
   .scard:hover{box-shadow:var(--shadow);border-color:transparent}
@@ -325,10 +325,10 @@
   .modal .x svg{width:20px;height:20px;color:var(--navy)}
   /* 3D service detail panel */
   .scard{cursor:pointer}
-  .svc-modal{position:fixed;inset:0;z-index:320;display:none;align-items:center;justify-content:center;padding:24px;perspective:1500px}
+  .svc-modal{position:fixed;inset:0;z-index:320;display:none;align-items:center;justify-content:center;padding:24px;perspective:1600px}
   .svc-modal.open{display:flex}
-  .svc-modal .backdrop{position:absolute;inset:0;background:rgba(9,18,40,.62);backdrop-filter:blur(8px)}
-  .svc-card{position:relative;z-index:2;background:#fff;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;border-radius:24px;box-shadow:0 50px 100px -30px rgba(9,18,40,.75);transform-origin:center center}
+  .svc-modal .backdrop{position:absolute;inset:0;background:rgba(9,18,40,.75);backdrop-filter:blur(12px)}
+  .svc-card{position:relative;z-index:2;background:#fff;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;border-radius:24px;box-shadow:0 50px 100px -30px rgba(9,18,40,.75);transform-origin:center center;transform-style:preserve-3d;backface-visibility:hidden}
   .svc-card .cx{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.16);border:none;color:#fff;cursor:pointer;display:grid;place-items:center;z-index:4}
   .svc-card .cx svg{width:20px;height:20px}
   .svc-hd{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;padding:38px 36px 30px}
@@ -1059,9 +1059,13 @@
       modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
       card.scrollTop=0;
       if(anim){
-        gsap.fromTo(backdrop,{opacity:0},{opacity:1,duration:.4,ease:'power1.out'});
-        gsap.fromTo(card,{scale:.78,y:60,rotateX:12,opacity:0,filter:'blur(12px)'},{scale:1,y:0,rotateX:0,opacity:1,filter:'blur(0px)',duration:.62,ease:'power3.out',delay:.08});
-        if(srcCard){lastCard=srcCard;gsap.fromTo(srcCard,{scale:1},{scale:1.35,opacity:0,filter:'blur(6px)',duration:.45,ease:'power2.in',onComplete:function(){srcCard.style.visibility='hidden';}});}
+        gsap.fromTo(backdrop,{opacity:0},{opacity:1,duration:.5,ease:'power1.out'});
+        // La carte cliquée fonce vers le spectateur puis disparaît
+        if(srcCard){lastCard=srcCard;gsap.set(srcCard,{transformPerspective:1200,transformOrigin:'center center'});
+          gsap.to(srcCard,{z:560,scale:1.15,rotateX:-12,opacity:0,filter:'blur(9px)',duration:.55,ease:'power2.in',onComplete:function(){srcCard.style.visibility='hidden';}});}
+        // Le panneau surgit de la profondeur (fort translateZ + bascule 3D)
+        gsap.fromTo(card,{z:-900,scale:.4,rotateX:28,y:40,opacity:0,filter:'blur(16px)'},
+          {z:0,scale:1,rotateX:0,y:0,opacity:1,filter:'blur(0px)',duration:.82,ease:'power3.out',delay:.16});
       }
       // close buttons inside content
       inner.querySelectorAll('[data-close]').forEach(function(a){a.addEventListener('click',function(){close();});});
@@ -1069,7 +1073,7 @@
     function restoreCard(){if(lastCard){if(anim)gsap.set(lastCard,{clearProps:'all'});lastCard.style.visibility='';lastCard.style.transform='';lastCard=null;}}
     function close(){
       function done(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';if(anim)gsap.set(card,{clearProps:'all'});restoreCard();}
-      if(anim){gsap.to(card,{scale:.9,y:30,opacity:0,filter:'blur(8px)',duration:.34,ease:'power2.in',onComplete:done});gsap.to(backdrop,{opacity:0,duration:.34});}
+      if(anim){gsap.to(card,{z:-620,scale:.5,rotateX:22,opacity:0,filter:'blur(12px)',duration:.42,ease:'power2.in',onComplete:done});gsap.to(backdrop,{opacity:0,duration:.42});}
       else done();
     }
     document.querySelectorAll('.scard').forEach(function(c){
