@@ -323,6 +323,30 @@
   .modal p{color:var(--ink-2);font-size:.94rem}
   .modal .x{float:right;background:var(--bg-2);border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
   .modal .x svg{width:20px;height:20px;color:var(--navy)}
+  /* 3D service detail panel */
+  .scard{cursor:pointer}
+  .svc-modal{position:fixed;inset:0;z-index:320;display:none;align-items:center;justify-content:center;padding:24px;perspective:1500px}
+  .svc-modal.open{display:flex}
+  .svc-modal .backdrop{position:absolute;inset:0;background:rgba(9,18,40,.62);backdrop-filter:blur(8px)}
+  .svc-card{position:relative;z-index:2;background:#fff;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;border-radius:24px;box-shadow:0 50px 100px -30px rgba(9,18,40,.75);transform-origin:center center}
+  .svc-card .cx{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.16);border:none;color:#fff;cursor:pointer;display:grid;place-items:center;z-index:4}
+  .svc-card .cx svg{width:20px;height:20px}
+  .svc-hd{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;padding:38px 36px 30px}
+  .svc-hd.env{background:linear-gradient(135deg,var(--emerald),#0a3f3a)}
+  .svc-hd .ic{width:62px;height:62px;border-radius:16px;background:rgba(255,255,255,.14);display:grid;place-items:center;margin-bottom:16px}
+  .svc-hd .ic svg{width:30px;height:30px;color:var(--gold-2)}
+  .svc-hd.env .ic svg{color:#d8f0c8}
+  .svc-hd .kick{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-2);margin-bottom:.5rem}
+  .svc-hd.env .kick{color:#d8f0c8}
+  .svc-hd h2{color:#fff;font-size:2rem;line-height:1.15}
+  .svc-hd p{color:rgba(255,255,255,.82);margin-top:.7rem;font-size:1.02rem}
+  .svc-bd{padding:30px 36px 36px}
+  .svc-bd h4{color:var(--navy);margin:1.4rem 0 .5rem;font-size:1.08rem;font-family:var(--serif)}
+  .svc-bd p{color:var(--ink-2);font-size:.97rem}
+  .svc-bd ul{list-style:none;display:grid;gap:.55rem;margin:.7rem 0 0}
+  .svc-bd li{display:flex;gap:.6rem;color:var(--ink-2);font-size:.95rem}
+  .svc-bd li svg{width:18px;height:18px;color:var(--gold);flex:none;margin-top:3px}
+  .svc-cta{margin-top:1.8rem;display:flex;gap:.8rem;flex-wrap:wrap}
 
   @media(max-width:960px){
     .why-grid{grid-template-columns:1fr 1fr}
@@ -464,19 +488,19 @@
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></div>
         <h3>Conseil Juridique</h3>
         <p>Votre vie professionnelle ou sociale peut engendrer des situations nécessitant l'avis d'un expert. Nous vous guidons dans vos démarches.</p>
-        <a href="#contact" class="more">En savoir plus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#" data-svc="conseil" class="more">En savoir plus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="scard reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3>Consultation Juridique</h3>
         <p>LexConformis Firm offre des consultations juridiques aux personnes physiques et morales, en droit privé comme en droit public.</p>
-        <a href="#contact" class="more">En savoir plus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#" data-svc="consultation" class="more">En savoir plus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="scard env reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div>
         <h3>Études Environnementales</h3>
         <p>Nos experts réalisent vos études d'impact (EIES, PMC-ES) conformément à la loi 11/009 du 9 juillet 2011, jusqu'au Certificat Environnemental.</p>
-        <a href="#environnement" class="more">En savoir plus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#" data-svc="environnement" class="more">En savoir plus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
     <div class="engage reveal">
@@ -685,6 +709,15 @@
     <h4>Article 7 — Modalités de paiement</h4><p>Plusieurs modes de paiement sécurisés sont proposés, y compris le transfert bancaire et les paiements en ligne cryptés.</p>
     <h4>Article 8 — Remboursement</h4><p>Aucun remboursement n'est possible après le début de la prestation.</p>
     <h4>Article 9 — Propriété intellectuelle</h4><p>Le contenu du site est protégé par la législation en vigueur. Toute utilisation non autorisée expose à des poursuites.</p>
+  </div>
+</div>
+
+<!-- SERVICE DETAIL 3D PANEL -->
+<div class="svc-modal" id="svcModal" aria-hidden="true">
+  <div class="backdrop"></div>
+  <div class="svc-card">
+    <button class="cx" id="svcClose" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div id="svcInner"></div>
   </div>
 </div>
 
@@ -989,6 +1022,62 @@
     function submit(){var v=text.value.trim();if(!v)return;text.value='';ask(v);}
     send.addEventListener('click',submit);
     text.addEventListener('keydown',function(e){if(e.key==='Enter')submit();});
+  })();
+
+  // ===== PANNEAU 3D DÉTAIL SERVICE (plongée / émergence) =====
+  (function(){
+    var modal=document.getElementById('svcModal');if(!modal)return;
+    var card=modal.querySelector('.svc-card'),inner=document.getElementById('svcInner'),
+        backdrop=modal.querySelector('.backdrop'),closeBtn=document.getElementById('svcClose');
+    var chk='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+    var cta='<div class="svc-cta"><a href="#contact" class="btn btn-primary" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Consultez-nous</a><a href="https://wa.me/27618971391" class="btn btn-outline"><svg viewBox="0 0 24 24" fill="currentColor" style="color:#25d366"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.6.2-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-1.7-.9-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.2-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 5 4.3 1.9.8 2.6.9 3.5.7.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4zM12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2z"/></svg>WhatsApp</a></div>';
+    var briefcase='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>';
+    var users='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+    var leaf='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>';
+    function li(t){return '<li>'+chk+'<span>'+t+'</span></li>';}
+    var DATA={
+      conseil:{env:false,icon:briefcase,kick:'Prestation en ligne',title:'Conseil Juridique',sub:"Un éclairage d'expert pour vos décisions du quotidien et de votre activité.",
+        body:"<p>Votre vie professionnelle ou sociale peut engendrer des situations qui nécessitent l'avis d'un expert : un litige, un contrat à signer, une démarche administrative, un conflit familial ou de voisinage. Nous vous orientons avec des réponses claires et concrètes.</p>"
+          +"<h4>Comment ça se passe</h4><ul>"+li("Vous décrivez votre situation via le formulaire.")+li("Un conseiller spécialisé analyse votre dossier.")+li("Vous recevez une réponse précise par email.")+li("Si besoin, mise en relation avec un avocat compétent.")+"</ul>"
+          +"<h4>Pourquoi nous</h4><ul>"+li("Écoute attentive et analyse approfondie.")+li("Réactivité et confidentialité garanties.")+li("Accessible où que vous soyez, 24/7.")+"</ul>"},
+      consultation:{env:false,icon:users,kick:'Prestation en ligne',title:'Consultation Juridique',sub:"Pour les personnes physiques et morales, en droit privé comme en droit public.",
+        body:"<p>LexConformis Firm réalise des consultations juridiques structurées pour les particuliers comme pour les entreprises, dans les principales branches du droit.</p>"
+          +"<h4>Nos domaines</h4><ul>"+li("Droit de la famille — mariage, divorce, succession, filiation.")+li("Droit du travail — contrats, rupture, litiges employeur/employé.")+li("Droit des sociétés — création, statuts, opérations, liquidation.")+li("Droit des biens et des contrats — rédaction, exécution, litiges.")+"</ul>"
+          +"<h4>Le déroulé</h4><p>Vous exposez votre besoin, un conseiller étudie la branche concernée, et vous recevez une consultation écrite, avec un suivi si vous le souhaitez.</p>"},
+      environnement:{env:true,icon:leaf,kick:'Conformité environnementale',title:'Études Environnementales',sub:"EIES, PMC-ES et obtention de votre Certificat Environnemental.",
+        body:"<p>Avant tout projet de développement, d'infrastructure ou d'exploitation, une <b>Étude d'Impact Environnemental et Social (EIES)</b> est requise. Pour un projet déjà opérationnel, c'est un <b>Plan de Mise en Conformité (PMC-ES)</b> qui s'impose.</p>"
+          +"<h4>Notre accompagnement</h4><ul>"+li("Réalisation de l'EIES pour vos nouveaux projets.")+li("Rédaction du PMC-ES pour les projets en cours.")+li("Suivi complet du dossier auprès de l'Agence Congolaise de l'Environnement.")+li("Obtention de votre Certificat Environnemental officiel.")+"</ul>"
+          +"<h4>Cadre légal</h4><p><em>« Tout projet susceptible d'avoir un impact sur l'environnement est assujetti à une étude d'impact environnemental et social… »</em> — Art. 21, Loi 11/009 du 9 juillet 2011.</p>"}
+    };
+    var lastCard=null,anim=(typeof gsap!=='undefined'&&!reduce);
+    function build(d){
+      return '<div class="svc-hd'+(d.env?' env':'')+'"><div class="ic">'+d.icon+'</div><div class="kick">'+d.kick+'</div><h2>'+d.title+'</h2><p>'+d.sub+'</p></div><div class="svc-bd">'+d.body+cta+'</div>';
+    }
+    function open(key,srcCard){
+      var d=DATA[key];if(!d)return;
+      inner.innerHTML=build(d);
+      modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+      card.scrollTop=0;
+      if(anim){
+        gsap.fromTo(backdrop,{opacity:0},{opacity:1,duration:.4,ease:'power1.out'});
+        gsap.fromTo(card,{scale:.78,y:60,rotateX:12,opacity:0,filter:'blur(12px)'},{scale:1,y:0,rotateX:0,opacity:1,filter:'blur(0px)',duration:.62,ease:'power3.out',delay:.08});
+        if(srcCard){lastCard=srcCard;gsap.fromTo(srcCard,{scale:1},{scale:1.35,opacity:0,filter:'blur(6px)',duration:.45,ease:'power2.in',onComplete:function(){srcCard.style.visibility='hidden';}});}
+      }
+      // close buttons inside content
+      inner.querySelectorAll('[data-close]').forEach(function(a){a.addEventListener('click',function(){close();});});
+    }
+    function restoreCard(){if(lastCard){if(anim)gsap.set(lastCard,{clearProps:'all'});lastCard.style.visibility='';lastCard.style.transform='';lastCard=null;}}
+    function close(){
+      function done(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';if(anim)gsap.set(card,{clearProps:'all'});restoreCard();}
+      if(anim){gsap.to(card,{scale:.9,y:30,opacity:0,filter:'blur(8px)',duration:.34,ease:'power2.in',onComplete:done});gsap.to(backdrop,{opacity:0,duration:.34});}
+      else done();
+    }
+    document.querySelectorAll('.scard').forEach(function(c){
+      c.addEventListener('click',function(e){var link=c.querySelector('[data-svc]');if(!link)return;e.preventDefault();open(link.getAttribute('data-svc'),c);});
+    });
+    closeBtn.addEventListener('click',close);
+    backdrop.addEventListener('click',close);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close();});
   })();
 
   // Form -> mailto
