@@ -1049,13 +1049,13 @@
           +"<h4>Notre accompagnement</h4><ul>"+li("Réalisation de l'EIES pour vos nouveaux projets.")+li("Rédaction du PMC-ES pour les projets en cours.")+li("Suivi complet du dossier auprès de l'Agence Congolaise de l'Environnement.")+li("Obtention de votre Certificat Environnemental officiel.")+"</ul>"
           +"<h4>Cadre légal</h4><p><em>« Tout projet susceptible d'avoir un impact sur l'environnement est assujetti à une étude d'impact environnemental et social… »</em> — Art. 21, Loi 11/009 du 9 juillet 2011.</p>"}
     };
-    var lastCard=null,anim=(typeof gsap!=='undefined'&&!reduce);
+    var lastCard=null;function anim(){return typeof gsap!=='undefined'&&!reduce;}
     function build(d){
       return '<div class="svc-hd'+(d.env?' env':'')+'"><div class="ic">'+d.icon+'</div><div class="kick">'+d.kick+'</div><h2>'+d.title+'</h2><p>'+d.sub+'</p></div><div class="svc-bd">'+d.body+cta+'</div>';
     }
     function showPanel(){
       modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';card.scrollTop=0;
-      if(anim){
+      if(anim()){
         gsap.fromTo(backdrop,{opacity:0},{opacity:1,duration:.4,ease:'power1.out'});
         gsap.fromTo(card,{scale:.5,rotateY:-60,opacity:0,filter:'blur(12px)'},{scale:1,rotateY:0,opacity:1,filter:'blur(0px)',duration:.72,ease:'back.out(1.5)'});
       }
@@ -1064,7 +1064,7 @@
       var d=DATA[key];if(!d)return;
       inner.innerHTML=build(d);
       inner.querySelectorAll('[data-close]').forEach(function(a){a.addEventListener('click',close);});
-      if(!anim||!srcCard){showPanel();return;}
+      if(!anim()||!srcCard){showPanel();return;}
       lastCard=srcCard;
       var parent=srcCard.parentNode,sibs=[],rect=srcCard.getBoundingClientRect();
       [].forEach.call(parent.children,function(c){if(c!==srcCard&&c.classList&&c.classList.contains('scard'))sibs.push(c);});
@@ -1087,8 +1087,8 @@
       lastCard=null;
     }
     function close(){
-      function done(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';if(anim)gsap.set(card,{clearProps:'all'});restoreCard();}
-      if(anim){
+      function done(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';if(anim())gsap.set(card,{clearProps:'all'});restoreCard();}
+      if(anim()){
         gsap.to(card,{scale:.5,rotateY:45,opacity:0,filter:'blur(10px)',duration:.4,ease:'power2.in',onComplete:done});
         gsap.to(backdrop,{opacity:0,duration:.4});
       } else done();
