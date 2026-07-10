@@ -787,22 +787,7 @@
       .from('.hero .lead',{y:24,opacity:0,duration:.6},0.5)
       .from('.hero .hero-cta',{y:24,opacity:0,duration:.6},0.65);
 
-    // ===== RÉVÉLATIONS EN CASCADE (sans épinglage → fluide, aucun écran blanc) =====
-    // Grilles de cartes : apparition décalée, élégante
-    [['.cards3','.scard'],['.dgrid','.dcard'],['.bgrid','.bcard'],['.steps','.step'],['.about-feats','.f']].forEach(function(g){
-      var wrap=document.querySelector(g[0]);if(!wrap)return;
-      var cards=wrap.querySelectorAll(g[1]);if(!cards.length)return;
-      gsap.set(cards,{opacity:0,y:48,scale:0.975});
-      gsap.to(cards,{opacity:1,y:0,scale:1,duration:.85,ease:'power3.out',stagger:0.12,
-        scrollTrigger:{trigger:wrap,start:'top 84%',toggleActions:'play none none reverse'}});
-    });
-    // Titres, textes et blocs restants : fondu-montée doux
-    var grouped='.scard,.dcard,.bcard,.step,.about-feats .f';
-    gsap.utils.toArray('.reveal').forEach(function(el){
-      if(el.matches(grouped))return;
-      gsap.fromTo(el,{opacity:0,y:36},{opacity:1,y:0,duration:.8,ease:'power3.out',
-        scrollTrigger:{trigger:el,start:'top 86%',toggleActions:'play none none reverse'}});
-    });
+    // Les révélations de contenu sont gérées par setupReveals() (méthode robuste CSS + IntersectionObserver, indépendante de GSAP).
     // Process : la barre se remplit au passage (scrub doux, sans figer)
     (function(){var proc=document.getElementById('process');if(!proc)return;
       gsap.timeline({scrollTrigger:{trigger:proc,start:'top 66%',end:'bottom 74%',scrub:0.6}})
@@ -915,7 +900,24 @@
     }
   }
 
-  window.addEventListener('DOMContentLoaded',function(){initGlobe();initCinematic();initHeroVideo();initSmooth();initCursor();initLoader();});
+  /* ===== RÉVÉLATIONS DE CONTENU — robustes (CSS + IntersectionObserver, indépendantes de GSAP) ===== */
+  function setupReveals(){
+    var els=[].slice.call(document.querySelectorAll('.reveal'));
+    els.forEach(function(el,i){el.style.transitionDelay=((i%4)*0.06)+'s';});
+    function show(el){el.classList.add('in');}
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
+      els.forEach(function(el){io.observe(el);});
+    }else{els.forEach(show);}
+    // Filet de sécurité : tout élément visible resté caché est révélé (le contenu ne peut jamais rester invisible)
+    function safety(){var vh=window.innerHeight||800;els.forEach(function(el){if(el.classList.contains('in'))return;var r=el.getBoundingClientRect();if(r.top<vh&&r.bottom>0)show(el);});}
+    window.addEventListener('scroll',safety,{passive:true});
+    window.addEventListener('resize',safety);
+    window.addEventListener('load',function(){safety();setTimeout(safety,700);});
+    setTimeout(safety,1000);
+  }
+
+  window.addEventListener('DOMContentLoaded',function(){setupReveals();initGlobe();initCinematic();initHeroVideo();initSmooth();initCursor();initLoader();});
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){if(typeof ScrollTrigger!=='undefined')ScrollTrigger.refresh();});}
   window.addEventListener('load',function(){if(typeof ScrollTrigger!=='undefined')ScrollTrigger.refresh();});
 
