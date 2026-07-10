@@ -884,23 +884,34 @@
 
   /* ===== HERO VIDEO INTERACTIF (mouvement continu + parallaxe souris + texte en rythme) ===== */
   function initHeroVideo(){
-    var v=document.querySelector('.hero-bg'),hero=document.getElementById('accueil'),wrap=v?v.parentNode:null;
+    var v=document.querySelector('.hero-bg'),hero=document.getElementById('accueil');
     if(!v||!hero)return;
-    // Lecture d'ambiance en continu (toujours en mouvement)
-    v.muted=true;v.setAttribute('loop','');v.setAttribute('autoplay','');
-    function play(){var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){});}
-    if(v.readyState>=2)play(); v.addEventListener('canplay',play,{once:true}); v.load&&v.load();
-    if(reduce)return;
+    v.muted=true;v.removeAttribute('loop');v.setAttribute('autoplay','');
+    function fwd(){var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){});}
+    if(reduce){v.setAttribute('loop','');fwd();return;}
+    var dir=1,active=true,dur=0;
+    function setDur(){dur=(v.duration&&isFinite(v.duration))?v.duration:0;}
+    v.addEventListener('loadedmetadata',setDur);if(v.readyState>=1)setDur();
+    if(v.readyState>=2)fwd(); v.addEventListener('canplay',fwd,{once:true}); v.load&&v.load();
+    // Boucle « boomerang » : avance puis revient en arrière -> aucune coupure visible
+    (function loop(){
+      if(active&&dur>0.3){
+        if(dir===1){ if(v.currentTime>=dur-0.12){dir=-1;try{v.pause();}catch(e){}} }
+        else { v.currentTime=Math.max(0,v.currentTime-0.034); if(v.currentTime<=0.06){dir=1;fwd();} }
+      }
+      requestAnimationFrame(loop);
+    })();
     // Parallaxe souris : léger zoom + décalage
     hero.addEventListener('mousemove',function(e){var r=hero.getBoundingClientRect();var x=(e.clientX-r.width/2)/r.width;var y=(e.clientY-r.height/2)/r.height;
       v.style.transform='scale(1.12) translate('+(x*-20).toFixed(1)+'px,'+(y*-20).toFixed(1)+'px)';});
     hero.addEventListener('mouseleave',function(){v.style.transform='scale(1.06)';});
-    // Le texte s'estompe et glisse au scroll ; la vidéo se met en pause hors écran (perf)
+    // Le texte s'estompe au scroll ; la vidéo se met en veille hors écran (perf)
     if(typeof gsap!=='undefined'&&typeof ScrollTrigger!=='undefined'){
       gsap.to('.hero-in',{yPercent:-30,opacity:0.1,ease:'none',
         scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:0.5}});
       ScrollTrigger.create({trigger:hero,start:'top bottom',end:'bottom top',
-        onEnter:play,onEnterBack:play,onLeave:function(){try{v.pause();}catch(e){}},onLeaveBack:function(){try{v.pause();}catch(e){}}});
+        onEnter:function(){active=true;if(dir===1)fwd();},onEnterBack:function(){active=true;if(dir===1)fwd();},
+        onLeave:function(){active=false;try{v.pause();}catch(e){}},onLeaveBack:function(){active=false;try{v.pause();}catch(e){}}});
     }
   }
 
@@ -1053,45 +1064,50 @@
     function build(d){
       return '<div class="svc-hd'+(d.env?' env':'')+'"><div class="ic">'+d.icon+'</div><div class="kick">'+d.kick+'</div><h2>'+d.title+'</h2><p>'+d.sub+'</p></div><div class="svc-bd">'+d.body+cta+'</div>';
     }
-    function showPanel(){
-      modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';card.scrollTop=0;
-      if(anim()){
-        gsap.fromTo(backdrop,{opacity:0},{opacity:1,duration:.4,ease:'power1.out'});
-        gsap.fromTo(card,{scale:.5,rotateY:-60,opacity:0,filter:'blur(12px)'},{scale:1,rotateY:0,opacity:1,filter:'blur(0px)',duration:.72,ease:'back.out(1.5)'});
-      }
+    function bare(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';card.scrollTop=0;}
+    function spreadSiblings(srcCard,r,out){
+      [].forEach.call(srcCard.parentNode.children,function(c){
+        if(c===srcCard||!(c.classList&&c.classList.contains('scard')))return;
+        var sr=c.getBoundingClientRect();var dir=(sr.left<r.left)?-1:1;gsap.killTweensOf(c);
+        if(out)gsap.to(c,{xPercent:dir*140,rotateY:dir*40,scale:.82,opacity:0,duration:.6,ease:'power3.out'});
+        else gsap.to(c,{xPercent:0,rotateY:0,scale:1,opacity:1,duration:.55,ease:'power3.out'});
+      });
     }
     function open(key,srcCard){
       var d=DATA[key];if(!d)return;
       inner.innerHTML=build(d);
       inner.querySelectorAll('[data-close]').forEach(function(a){a.addEventListener('click',close);});
-      if(!anim()||!srcCard){showPanel();return;}
+      if(!anim()||!srcCard){bare();return;}
       lastCard=srcCard;
-      var parent=srcCard.parentNode,sibs=[],rect=srcCard.getBoundingClientRect();
-      [].forEach.call(parent.children,function(c){if(c!==srcCard&&c.classList&&c.classList.contains('scard'))sibs.push(c);});
-      gsap.killTweensOf(srcCard);
-      gsap.set(srcCard,{transformPerspective:1000,transformOrigin:'center center',zIndex:200,position:'relative'});
-      var tl=gsap.timeline();
-      // 1) les autres cartes s'écartent
-      sibs.forEach(function(s){var sr=s.getBoundingClientRect();var dir=(sr.left<rect.left)?-1:1;
-        tl.to(s,{xPercent:dir*70,rotateY:dir*22,opacity:0,duration:.5,ease:'power2.out'},0);});
-      // 2) la carte recule, 3) revient en grand en tournoyant, 4) se fond dans le panneau
-      tl.to(srcCard,{z:-340,scale:.78,duration:.42,ease:'power2.in'},0)
-        .to(srcCard,{z:240,scale:1.5,rotateY:360,duration:.75,ease:'power3.out'},0.42)
-        .to(srcCard,{opacity:0,duration:.26,ease:'power1.in'},'-=0.26')
-        .add(showPanel,0.82);
-    }
-    function restoreCard(){
-      if(lastCard&&lastCard.parentNode){
-        [].forEach.call(lastCard.parentNode.children,function(c){if(c.classList&&c.classList.contains('scard')){gsap.killTweensOf(c);gsap.set(c,{clearProps:'all'});}});
-      }
-      lastCard=null;
+      var r=srcCard.getBoundingClientRect();
+      spreadSiblings(srcCard,r,true);          // les 2 autres s'écartent franchement
+      srcCard.style.visibility='hidden';       // la carte "devient" le panneau
+      bare();
+      gsap.set(card,{clearProps:'transform,opacity,filter'});
+      var nr=card.getBoundingClientRect();
+      var scale=r.width/nr.width;
+      var dx=(r.left+r.width/2)-(nr.left+nr.width/2);
+      var dy=(r.top+r.height/2)-(nr.top+nr.height/2);
+      gsap.set(backdrop,{opacity:0});
+      gsap.set(card,{transformOrigin:'center center',x:dx,y:dy,scale:scale,rotateY:-46,opacity:1});
+      gsap.to(backdrop,{opacity:1,duration:.6,ease:'power1.out'});
+      gsap.fromTo(inner,{opacity:0},{opacity:1,duration:.45,delay:.22,ease:'power1.out'});
+      // FLIP : la carte grandit depuis sa position, tourne, et se fixe en plein panneau
+      gsap.to(card,{x:0,y:0,scale:1,rotateY:0,duration:.9,ease:'power3.inOut',onComplete:function(){gsap.set(card,{clearProps:'transform'});}});
     }
     function close(){
-      function done(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';if(anim())gsap.set(card,{clearProps:'all'});restoreCard();}
-      if(anim()){
-        gsap.to(card,{scale:.5,rotateY:45,opacity:0,filter:'blur(10px)',duration:.4,ease:'power2.in',onComplete:done});
-        gsap.to(backdrop,{opacity:0,duration:.4});
-      } else done();
+      function done(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';
+        gsap.set(card,{clearProps:'all'});
+        if(lastCard){lastCard.style.visibility='';var lc=lastCard;lastCard=null;spreadSiblings(lc,lc.getBoundingClientRect(),false);gsap.set(lc,{clearProps:'all'});}
+      }
+      if(!anim()){done();return;}
+      var srcCard=lastCard, tw={transformOrigin:'center center',x:0,y:0,scale:1,rotateY:42,opacity:0,duration:.6,ease:'power3.inOut',onComplete:done};
+      if(srcCard){var r=srcCard.getBoundingClientRect();var nr=card.getBoundingClientRect();
+        tw.x=(r.left+r.width/2)-(nr.left+nr.width/2);tw.y=(r.top+r.height/2)-(nr.top+nr.height/2);tw.scale=r.width/nr.width;tw.rotateY=40;tw.opacity=1;
+        spreadSiblings(srcCard,r,false);
+      }
+      gsap.to(backdrop,{opacity:0,duration:.6});
+      gsap.to(card,tw);
     }
     document.querySelectorAll('.scard').forEach(function(c){
       c.addEventListener('click',function(e){var link=c.querySelector('[data-svc]');if(!link)return;e.preventDefault();open(link.getAttribute('data-svc'),c);});
